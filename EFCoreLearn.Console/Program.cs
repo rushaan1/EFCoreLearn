@@ -1,11 +1,31 @@
 ﻿using EFCoreLearn.Data;
+using EFCoreLearn.Domain;
 using Microsoft.EntityFrameworkCore;
 
-using var context = new FootballLeagueDbContext();
-var team = await (from t in context.Teams
-           where t.TeamId == 2
-           select t).FirstAsync();
-Console.WriteLine($"\n\n{team.Name}");
+var context = new FootballLeagueDbContext();
+
+int page = 0;
+int recordCount = 3;
+bool next = true;
+
+while (next)
+{
+    var teams = await context.Teams.Skip(page * recordCount).Take(recordCount).ToListAsync();
+    Console.WriteLine(teams.Count);
+    foreach (var team in teams)
+    {
+        Console.WriteLine("Team Name: " + team.Name);
+    }
+    Console.WriteLine("Continue? true/false");
+    next = Convert.ToBoolean(Console.ReadLine());
+    if (!next)
+    {
+        break;
+    }
+    page++;
+}
+//orderedTeams.ForEach(team => Console.WriteLine($"\n\n{team.Name}") );
+
 
 //var teams = context.Teams.ToList();
 //foreach (var team in teams) 
