@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,6 +14,8 @@ namespace EFCoreLearn.Data
     {
         public DbSet<Team> Teams { get; set; }
         public DbSet<Coach> Coaches { get; set; }
+        public DbSet<League> Leagues { get; set; }
+        public DbSet<Match> Matches { get; set; }
         public string DbPath { get; private set; }
 
         public FootballLeagueDbContext() 
@@ -32,27 +35,7 @@ namespace EFCoreLearn.Data
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Team>().HasData(
-                    new Team
-                    {
-                        TeamId = 1,
-                        Name = "Tivoli Gardens F.C.",
-                        CreatedDate = DateTimeOffset.UtcNow.DateTime
-                    },
-                    new Team
-                    {
-                        TeamId = 2,
-                        Name = "Waterhouse F.C.",
-                        CreatedDate = DateTimeOffset.UtcNow.DateTime
-                    },
-                    new Team
-                    {
-                        TeamId = 3,
-                        Name = "Humble Lions F.C.",
-                        CreatedDate = DateTimeOffset.UtcNow.DateTime
-                    }
-
-                );
+            //modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
     }
 }

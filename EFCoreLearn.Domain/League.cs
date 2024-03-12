@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace EFCoreLearn.Domain
 {
-    public class Coach : BaseDomainModel
+    public class League : BaseDomainModel
     {
         public string Name { get; set; }
-        public int? TeamId { get; set; }
+        public List<Team>? Teams { get; set; }
     }
 }
