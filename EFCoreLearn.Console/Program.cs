@@ -4,47 +4,67 @@ using Microsoft.EntityFrameworkCore;
 
 var context = new FootballLeagueDbContext();
 
-var transaction = context.Database.BeginTransaction();
-
-var league = new League
+var beforeLeagues = context.Leagues.ToList();
+Console.WriteLine("\nBEFORE DELETING THE LEAGUE:");
+foreach (var l in beforeLeagues) 
 {
-    Name = "Testing Transactions"
-};
-
-context.Add(league);
-context.SaveChanges();
-transaction.CreateSavepoint("CreatedLeague");
-
-var coach = new Coach
-{
-    Name = "Transaction Coach"
-};
-
-context.Add(coach);
-context.SaveChanges();
-
-var teams = new List<Team>
-{
-    new Team
-    {
-        Name = "Transaction Team 1",
-        LeagueId = league.Id,
-        CoachId = coach.Id
-    }
-};
-context.AddRange(teams);
-context.SaveChanges();
-
-try
-{
-    transaction.Commit();
-    Console.WriteLine("Transaction Successful!");
+    Console.WriteLine(l.Name);
 }
-catch (Exception) 
+
+var leagueToDelete = context.Leagues.Find(6);
+leagueToDelete.IsDeleted = true;
+context.SaveChanges();
+
+var afterLeagues = context.Leagues.ToList();
+Console.WriteLine("\nAFTER DELETING THE LEAGUE:");
+foreach (var l in afterLeagues)
 {
-    transaction.RollbackToSavepoint("CreatedLeague");
-    Console.WriteLine("Transaction Failed & rolled back!");
+    Console.WriteLine(l.Name);
 }
+
+
+
+//var transaction = context.Database.BeginTransaction();
+
+//var league = new League
+//{
+//    Name = "Testing Transactions"
+//};
+
+//context.Add(league);
+//context.SaveChanges();
+//transaction.CreateSavepoint("CreatedLeague");
+
+//var coach = new Coach
+//{
+//    Name = "Transaction Coach"
+//};
+
+//context.Add(coach);
+//context.SaveChanges();
+
+//var teams = new List<Team>
+//{
+//    new Team
+//    {
+//        Name = "Transaction Team 1",
+//        LeagueId = league.Id,
+//        CoachId = coach.Id
+//    }
+//};
+//context.AddRange(teams);
+//context.SaveChanges();
+
+//try
+//{
+//    transaction.Commit();
+//    Console.WriteLine("Transaction Successful!");
+//}
+//catch (Exception) 
+//{
+//    transaction.RollbackToSavepoint("CreatedLeague");
+//    Console.WriteLine("Transaction Failed & rolled back!");
+//}
 
 //var testLeague = new League()
 //{
