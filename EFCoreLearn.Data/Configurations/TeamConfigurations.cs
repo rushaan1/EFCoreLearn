@@ -13,6 +13,10 @@ namespace EFCoreLearn.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Team> builder)
         {
+
+            builder.Property(q => q.Version)
+                .IsConcurrencyToken();
+
             builder.HasIndex(q => q.Name).IsUnique();
             
             builder.HasMany(m=>m.HomeMatches)

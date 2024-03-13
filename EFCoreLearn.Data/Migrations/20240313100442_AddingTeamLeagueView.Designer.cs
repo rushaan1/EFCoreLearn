@@ -3,6 +3,7 @@ using System;
 using EFCoreLearn.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EFCoreLearn.Data.Migrations
 {
     [DbContext(typeof(FootballLeagueDbContext))]
-    partial class FootballLeagueDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240313100442_AddingTeamLeagueView")]
+    partial class AddingTeamLeagueView
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.16");
@@ -24,14 +27,12 @@ namespace EFCoreLearn.Data.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("CreatedBy")
-                        .HasMaxLength(120)
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ModifiedBy")
-                        .HasMaxLength(120)
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("ModifiedDate")
@@ -39,11 +40,6 @@ namespace EFCoreLearn.Data.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(120)
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid>("Version")
-                        .IsConcurrencyToken()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -56,24 +52,21 @@ namespace EFCoreLearn.Data.Migrations
                             Id = 1,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Jose Mourinho",
-                            Version = new Guid("00000000-0000-0000-0000-000000000000")
+                            Name = "Jose Mourinho"
                         },
                         new
                         {
                             Id = 2,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Pep Guardiola",
-                            Version = new Guid("00000000-0000-0000-0000-000000000000")
+                            Name = "Pep Guardiola"
                         },
                         new
                         {
                             Id = 3,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Trevoir Williams",
-                            Version = new Guid("00000000-0000-0000-0000-000000000000")
+                            Name = "Trevoir Williams"
                         });
                 });
 
@@ -84,14 +77,12 @@ namespace EFCoreLearn.Data.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("CreatedBy")
-                        .HasMaxLength(120)
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ModifiedBy")
-                        .HasMaxLength(120)
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("ModifiedDate")
@@ -99,11 +90,6 @@ namespace EFCoreLearn.Data.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(120)
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid>("Version")
-                        .IsConcurrencyToken()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -116,24 +102,21 @@ namespace EFCoreLearn.Data.Migrations
                             Id = 1,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Jamaica Premiere League",
-                            Version = new Guid("00000000-0000-0000-0000-000000000000")
+                            Name = "Jamaica Premiere League"
                         },
                         new
                         {
                             Id = 2,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "English Premiere League",
-                            Version = new Guid("00000000-0000-0000-0000-000000000000")
+                            Name = "English Premiere League"
                         },
                         new
                         {
                             Id = 3,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "La Liga",
-                            Version = new Guid("00000000-0000-0000-0000-000000000000")
+                            Name = "La Liga"
                         });
                 });
 
@@ -150,7 +133,6 @@ namespace EFCoreLearn.Data.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("CreatedBy")
-                        .HasMaxLength(120)
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("CreatedDate")
@@ -166,7 +148,6 @@ namespace EFCoreLearn.Data.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("ModifiedBy")
-                        .HasMaxLength(120)
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("ModifiedDate")
@@ -174,10 +155,6 @@ namespace EFCoreLearn.Data.Migrations
 
                     b.Property<int>("TicketPrice")
                         .HasColumnType("INTEGER");
-
-                    b.Property<Guid>("Version")
-                        .IsConcurrencyToken()
-                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -198,7 +175,6 @@ namespace EFCoreLearn.Data.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("CreatedBy")
-                        .HasMaxLength(120)
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("CreatedDate")
@@ -208,18 +184,12 @@ namespace EFCoreLearn.Data.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("ModifiedBy")
-                        .HasMaxLength(120)
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("ModifiedDate")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(120)
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid>("Version")
-                        .IsConcurrencyToken()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -242,8 +212,7 @@ namespace EFCoreLearn.Data.Migrations
                             CreatedDate = new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             LeagueId = 1,
                             ModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Tivoli Gardens F.C.",
-                            Version = new Guid("00000000-0000-0000-0000-000000000000")
+                            Name = "Tivoli Gardens F.C."
                         },
                         new
                         {
@@ -252,8 +221,7 @@ namespace EFCoreLearn.Data.Migrations
                             CreatedDate = new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             LeagueId = 1,
                             ModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Waterhouse F.C.",
-                            Version = new Guid("00000000-0000-0000-0000-000000000000")
+                            Name = "Waterhouse F.C."
                         },
                         new
                         {
@@ -262,24 +230,8 @@ namespace EFCoreLearn.Data.Migrations
                             CreatedDate = new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             LeagueId = 1,
                             ModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Humble Lions F.C.",
-                            Version = new Guid("00000000-0000-0000-0000-000000000000")
+                            Name = "Humble Lions F.C."
                         });
-                });
-
-            modelBuilder.Entity("EFCoreLearn.Domain.TeamsAndLeaguesView", b =>
-                {
-                    b.Property<string>("LeagueName")
-                        .HasMaxLength(120)
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(120)
-                        .HasColumnType("TEXT");
-
-                    b.ToTable((string)null);
-
-                    b.ToView("vw_TeamsAndLeagues", (string)null);
                 });
 
             modelBuilder.Entity("EFCoreLearn.Domain.Match", b =>
