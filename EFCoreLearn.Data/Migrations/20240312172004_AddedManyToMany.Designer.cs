@@ -3,6 +3,7 @@ using System;
 using EFCoreLearn.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EFCoreLearn.Data.Migrations
 {
     [DbContext(typeof(FootballLeagueDbContext))]
-    partial class FootballLeagueDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240312172004_AddedManyToMany")]
+    partial class AddedManyToMany
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.16");
@@ -39,32 +42,12 @@ namespace EFCoreLearn.Data.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<int?>("TeamId")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
 
                     b.ToTable("Coaches");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Jose Mourinho"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Pep Guardiola"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Trevoir Williams"
-                        });
                 });
 
             modelBuilder.Entity("EFCoreLearn.Domain.League", b =>
@@ -191,9 +174,6 @@ namespace EFCoreLearn.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CoachId")
-                        .IsUnique();
-
                     b.HasIndex("LeagueId");
 
                     b.HasIndex("Name")
@@ -205,27 +185,24 @@ namespace EFCoreLearn.Data.Migrations
                         new
                         {
                             Id = 1,
-                            CoachId = 1,
-                            CreatedDate = new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            LeagueId = 1,
+                            CoachId = 0,
+                            CreatedDate = new DateTime(2024, 3, 12, 17, 20, 4, 526, DateTimeKind.Unspecified).AddTicks(8347),
                             ModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Tivoli Gardens F.C."
                         },
                         new
                         {
                             Id = 2,
-                            CoachId = 2,
-                            CreatedDate = new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            LeagueId = 1,
+                            CoachId = 0,
+                            CreatedDate = new DateTime(2024, 3, 12, 17, 20, 4, 526, DateTimeKind.Unspecified).AddTicks(8353),
                             ModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Waterhouse F.C."
                         },
                         new
                         {
                             Id = 3,
-                            CoachId = 3,
-                            CreatedDate = new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            LeagueId = 1,
+                            CoachId = 0,
+                            CreatedDate = new DateTime(2024, 3, 12, 17, 20, 4, 526, DateTimeKind.Unspecified).AddTicks(8354),
                             ModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Humble Lions F.C."
                         });
@@ -252,24 +229,11 @@ namespace EFCoreLearn.Data.Migrations
 
             modelBuilder.Entity("EFCoreLearn.Domain.Team", b =>
                 {
-                    b.HasOne("EFCoreLearn.Domain.Coach", "Coach")
-                        .WithOne("Team")
-                        .HasForeignKey("EFCoreLearn.Domain.Team", "CoachId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("EFCoreLearn.Domain.League", "League")
                         .WithMany("Teams")
                         .HasForeignKey("LeagueId");
 
-                    b.Navigation("Coach");
-
                     b.Navigation("League");
-                });
-
-            modelBuilder.Entity("EFCoreLearn.Domain.Coach", b =>
-                {
-                    b.Navigation("Team");
                 });
 
             modelBuilder.Entity("EFCoreLearn.Domain.League", b =>
